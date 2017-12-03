@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+         <title>{% block title %}Welcome to mysite{% endblock %}</title>
+         {% load staticfiles %}
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+         <link rel="stylesheet" type="text/css" href="{% static 'urlShortnerWebsite/css/main.css' %}" />
+         <link rel="stylesheet" type="text/css" href="{% static 'urlShortnerWebsite/css/nice-select.css' %}" />
+         <link rel="stylesheet" type="text/css" href="{% static 'urlShortnerWebsite/css/custom.css' %}" />
+         <link rel="stylesheet" type="text/css" href="{% static 'urlShortnerWebsite/css/owl.carousel.css' %}" />
+         <link rel="stylesheet" type="text/css" href="{% static 'urlShortnerWebsite/css/pgwslider.min.css' %}" />
+         <link rel="stylesheet" type="text/css" href="{% static 'urlShortnerWebsite/css/linearicons.css' %}" />
+         <link rel="stylesheet" type="text/javascript" href="{% static 'urlShortnerWebsite/js/vendor/bootstrap.min.js' %}" />
+         <link rel="stylesheet" type="text/javascript" href="{% static 'urlShortnerWebsite/js/vendor/jquery-2.2.4.min.js' %}" />
+         <link rel="stylesheet" type="text/javascript" href="{% static 'urlShortnerWebsite/js/jquery.ajaxchimp.min.js' %}" />
+         <link rel="stylesheet" type="text/javascript" href="{% static 'urlShortnerWebsite/js/jquery.magnific-popup.min.js' %}" />
+         <link rel="stylesheet" type="text/javascript" href="{% static 'urlShortnerWebsite/js/jquery.nice-select.min.js' %}" />
+         <link rel="stylesheet" type="text/javascript" href="{% static 'urlShortnerWebsite/js/main.js' %}" />
+         <link rel="stylesheet" type="text/javascript" href="{% static 'urlShortnerWebsite/js/owl.carousel.js' %}" />
+         <link rel="stylesheet" type="text/javascript" href="{% static 'urlShortnerWebsite/js/pgwslider.min.js' %}" />
+         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <script type="text/javascript">
+     $(function() {
+     $('#submitButton').click(function() {
+     $.ajax({
+     type: "POST",
+     url: "/makeshort/",
+     data: {
+     'url' : $('#url').val(),
+     'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+     },
+     success: returnSuccess,
+     dataType: 'json'
+     });
+     });
+    });
+
+    function returnSuccess(data, textStatus, jqXHR) {
+     if(data.url) {
+     $('#url-result').text(data.url);
+     $('#url').val("");
+     } else {
+     $('#url-result').text("Do not submit blank.");
+     }
+
+    }
+    </script>
+    <body>
+        <div class="dup-body-wrap">
+        <section class="banner-area relative">
+            <header>
+             <h1><a href="{% url 'urlShortnerWebsite:home' %}">Nuri's URL Shortner</a></h1>
+            </header>
+
+
+        <body class="dup-body">
+
+                            {% block content %}
+
+                            {% endblock %}
+
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-4">
+                        <img src="img/banner.png" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div>
+
+        <script src="js/vendor/jquery-2.2.4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/jquery.ajaxchimp.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.nice-select.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+    </body>
+</html>

@@ -1,0 +1,18 @@
+{% extends "urlShortnerWebsite/base.html" %}
+
+{% block title %}Nuri's URL Shortner{% endblock %}
+
+{% block content %}
+
+ <div class="panel-body">
+     <div class="col-sm-9">
+     <input type="text" name="url" id="url" class="form-control input-sm" placeholder="http://www.facebook.com" />
+     </div>
+     <div class="col-sm-3">
+     {% csrf_token %}
+     <button id="submitButton" class="primary-btn">Change!<span class="lnr lnr-arrow-right"></span></button></p>
+      </div>
+ </div>
+ <div class="panel-footer"><span id="url-result">Write the URL you want to make shorten, and click the button!</span></div>
+</div>
+{% endblock %}
